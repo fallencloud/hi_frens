@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*****************************
+General Styles
+******************************/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roberto', sans-serif;
+  line-height: 1.4;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*****************************
+Utilities
+******************************/
+.container {
+  margin: auto;
+  padding: 0 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.p-1 {
+  padding: 1rem;
+}
+
+.p-2 {
+  padding: 1.5rem;
+}
+
+.p-3 {
+  padding: 2rem;
+}
+
+.py-1 {
+  padding: 1rem 0;
+}
+
+.text-primary {
+  color: #3498db;
+}
+
+.bg-primary {
+  background: #3498db;
+  color: #fff;
+}
+
+.bg-dark {
+  background: #2c3e50;
+  color: #fff;
+}
+.m-heading {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.1;
+}
+
+.btn {
+  display: inline-block;
+  color: #fff;
+  background: #3498db;
+  padding: 0.5rem 2rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  background: #fff;
+  color: #3498db;
+}
+
+.btn-light {
+  background: #fff;
+  color: #e74c3c;
+}
+
+.btn-light:hover {
+  background: #e74c3c;
+  color: #fff;
+}
+
+.btn-dark {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.btn-dark:hover {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+/*****************************
+Alerts and errors
+******************************/
+.alert {
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+/*****************************
+Navbar
+******************************/
+#navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #2c3e50;
+  color: #fff;
+}
+
+#navbar .logo {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+#navbar ul {
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  list-style: none;
+}
+
+#navbar ul li a {
+  color: #fff;
+  padding: 0.75rem;
+  margin: 0 0.25rem;
+}
+
+#navbar ul li a:hover {
+  background: #3498db;
+  border-radius: 5px;
+}
+
+/*****************************
+Registration/Login Form
+******************************/
+#signin,
+#login {
+  display: flex;
+  flex-direction: column;
+}
+
+.signin-form,
+.login-form {
+  min-height: 100%;
+}
+
+#signin h2,
+#login h2 {
+  margin-top: 1rem;
+  flex: 1;
+}
+
+#signin form,
+#login form {
+  align-self: stretch;
+}
+
+#signin .signin-form .form-group,
+#login .login-form .form-group {
+  margin: 0.75rem;
+}
+
+#signin .signin-form label,
+#login .login-form label {
+  display: block;
+}
+
+#signin .signin-form input,
+#login .login-form input {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+/*****************************
+Responsive Styles
+******************************/
+@media (min-width: 768px) {
+  #navbar {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
