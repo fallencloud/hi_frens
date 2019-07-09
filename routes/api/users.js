@@ -11,6 +11,13 @@ const User = mongoose.model('users');
 
 //set up routes
 
+// @route   GET api/users/register
+// @desc    User sign-in
+// @access  Public
+router.get('/register', (req, res) => {
+  res.render('users/index');
+});
+
 // @route   POST 	api/users
 // @desc    Create a user
 // @access  Public
@@ -64,13 +71,37 @@ router.post('/', (req, res) => {
   }
 });
 
+// @route   GET api/users/login
+// @desc    User sign-in
+// @access  Public
+router.get('/login', (req, res) => {
+  res.render('users/login');
+});
+
+// @route   POST api/users/login
+// @desc    User sign-in
+// @access  Public
+router.post('/login', (req, res, next) => {
+  //takes in a name of strategy
+  //where to go if successful
+  //where to go if unsuccesful
+  //whether or not to display messages
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '',
+    failureFlash: true
+  })(req, res, next);
+});
+
 // @route   GET api/users
 // @desc    List all users
 // @access  Public
 router.get('/', (req, res) => {
-  User.find({}).then(users => {
-    res.json(users);
-  });
+  User.find({})
+    .then(users => {
+      res.json(users);
+    })
+    .catch(err => console.error(err));
 });
 
 // @route   GET api/users/:userId
@@ -117,25 +148,13 @@ router.delete('/:id', (req, res) => {
     .catch(err => console.error(err));
 });
 
-// @route   POST /signin
-// @desc    User sign-in
-// @access  Public
-router.post('/signin', (req, res, next) => {
-  //authenticate with passport
-  passport.authenticate('local', {
-    successRedirect: '/newsfeed',
-    failureRedirect: '/users/signin',
-    failureFlash: true
-  })(req, res, next);
-});
-
-// @route   GET auth/signout
+// @route   GET api/users/logout
 // @desc    User sign-out
 // @access  Private
 router.get('/logout', (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/signin');
+  res.redirect('/users/login');
 });
 
 //export router

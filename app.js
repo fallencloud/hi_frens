@@ -84,13 +84,6 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// @route   GET 	/login
-// @desc    Show Login form
-// @access  Public
-app.get('/login', (req, res) => {
-  res.render('login');
-});
-
 //use routes
 app.use('/api/users', users);
 

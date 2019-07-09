@@ -1,10 +1,10 @@
 <section id="login">
   <div class="login-form bg-primary p-2">
-    <a href="/" class="btn btn-light">Signup</a>
+    <a href="/api/users/register" class="btn btn-light">Signup</a>
     <h2 class="m-heading">Log In</h2>
     {{> _errors}}
     {{> _msg}}
-    <form action="/api/users/signin" method="post">
+    <form action="/api/users/login" method="post">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="text" name="email" id="email" placeholder="Enter Email">
