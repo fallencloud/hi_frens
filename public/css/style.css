@@ -202,24 +202,27 @@ Registration/Login Form
 ******************************/
 #signin,
 #login {
-  display: flex;
-  flex-direction: column;
+  height: 100%;
 }
 
 .signin-form,
 .login-form {
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  align-content: center;
+}
+
+.signin-form .btn,
+.login-form .btn {
+  align-self: start;
 }
 
 #signin h2,
 #login h2 {
   margin-top: 1rem;
   flex: 1;
-}
-
-#signin form,
-#login form {
-  align-self: stretch;
 }
 
 #signin .signin-form .form-group,
