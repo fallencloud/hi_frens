@@ -24,3 +24,8 @@ A node-based social media app by Sharina V. Jones
 1. Add NavBar
 2. Added Register template
 3. Added Login template
+4. Connected the Register UI to the API
+5. Added the Users template
+6. Connected the Users UI to the API
+7. Added the User template
+8. Connected the User template to the API

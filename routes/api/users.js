@@ -5,11 +5,26 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
 
+//access control
+const { ensureAuthenticated } = require('../../helpers/auth');
+
 //Load user model
 require('../../models/User');
 const User = mongoose.model('users');
 
 //set up routes
+
+// @route   GET api/users
+// @desc    List all users
+// @access  Public
+router.get('/', (req, res) => {
+  User.find({})
+    .then(users => {
+      res.render('users/users', { users });
+      // res.json(users);
+    })
+    .catch(err => console.error(err));
+});
 
 // @route   GET api/users/register
 // @desc    User sign-in
@@ -87,19 +102,19 @@ router.post('/login', (req, res, next) => {
   //where to go if unsuccesful
   //whether or not to display messages
   passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '',
+    successRedirect: '/api/users/profile',
+    failureRedirect: '/api/users/login',
     failureFlash: true
   })(req, res, next);
 });
 
-// @route   GET api/users
-// @desc    List all users
-// @access  Public
-router.get('/', (req, res) => {
-  User.find({})
-    .then(users => {
-      res.json(users);
+// @route   GET api/users/:userId
+// @desc    Fetch user profile
+// @access  Private
+router.get('/profile', ensureAuthenticated, (req, res) => {
+  User.findOne({ _id: res.locals.user.id })
+    .then(user => {
+      res.render('users/profile', { user });
     })
     .catch(err => console.error(err));
 });
@@ -112,7 +127,7 @@ router.get('/:id', (req, res) => {
     _id: req.params.id
   })
     .then(user => {
-      res.json(user);
+      res.render('users/user', user);
     })
     .catch(err => console.error(err));
 });
@@ -120,7 +135,7 @@ router.get('/:id', (req, res) => {
 // @route   PUT api/users/:userId
 // @desc    Update a user
 // @access  Private
-router.put('/:id', (req, res) => {
+router.put('/:id', ensureAuthenticated, (req, res) => {
   User.findOne({
     _id: req.params.id
   }).then(user => {
@@ -140,7 +155,7 @@ router.put('/:id', (req, res) => {
 // @route   DELETE api/users/:userId
 // @desc    Delete a user
 // @access  Private
-router.delete('/:id', (req, res) => {
+router.delete('/:id', ensureAuthenticated, (req, res) => {
   User.deleteOne({ _id: req.params.id })
     .then(() => {
       res.json({});
@@ -151,7 +166,7 @@ router.delete('/:id', (req, res) => {
 // @route   GET api/users/logout
 // @desc    User sign-out
 // @access  Private
-router.get('/logout', (req, res) => {
+router.get('/logout', ensureAuthenticated, (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');

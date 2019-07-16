@@ -1,11 +1,11 @@
 //provides access control
 module.exports = {
   ensureAuthenticated: (req, res, next) => {
-    if (req.ensureAuthenticated) {
+    if (req.isAuthenticated()) {
       return next();
     } else {
       req.flash('error_msg', 'Not authorized');
-      res.redirect('/users/signin');
+      res.redirect('/api/users/login');
     }
   }
 };
