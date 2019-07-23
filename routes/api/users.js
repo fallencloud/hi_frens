@@ -14,10 +14,28 @@ const User = mongoose.model('users');
 
 //set up routes
 
+// @route   PUT api/users/profile
+// @desc    Edit Profile Information
+// @access  Private
+router.put('/profile', ensureAuthenticated, (req, res) => {
+  res.render('users/edit', currentUser);
+});
+
+// @route   GET api/users/edit/:id
+// @desc    Edit Profile Information
+// @access  Private
+router.get('/profile/edit', ensureAuthenticated, (req, res) => {
+  const currentUser = {
+    name: res.locals.user.name,
+    email: res.locals.user.email
+  };
+  res.render('users/edit', currentUser);
+});
+
 // @route   GET api/users/logout
 // @desc    User sign-out
 // @access  Private
-router.get('/logout', (req, res) => {
+router.get('/logout', ensureAuthenticated, (req, res) => {
   req.logout();
   req.flash('success_msg', 'You are logged out');
   res.redirect('/api/users/login');
@@ -144,13 +162,14 @@ router.get('/:id', (req, res) => {
 // @route   PUT api/users/:userId
 // @desc    Update a user
 // @access  Private
-router.put('/:id', ensureAuthenticated, (req, res) => {
+router.put('edit/:id', ensureAuthenticated, (req, res) => {
   User.findOne({
-    _id: req.params.id
+    user: req.user.id
   }).then(user => {
     //new values
-    user.title = req.body.title;
-    user.details = req.body.details;
+    user.name = req.body.name;
+    user.email = req.body.email;
+    user.password = req.body.password;
 
     user
       .save()
