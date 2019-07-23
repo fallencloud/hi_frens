@@ -14,6 +14,15 @@ const User = mongoose.model('users');
 
 //set up routes
 
+// @route   GET api/users/logout
+// @desc    User sign-out
+// @access  Private
+router.get('/logout', (req, res) => {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/api/users/login');
+});
+
 // @route   GET api/users
 // @desc    List all users
 // @access  Public
@@ -155,22 +164,13 @@ router.put('/:id', ensureAuthenticated, (req, res) => {
 // @route   DELETE api/users/:userId
 // @desc    Delete a user
 // @access  Private
-router.delete('/:id', ensureAuthenticated, (req, res) => {
-  User.deleteOne({ _id: req.params.id })
-    .then(() => {
-      res.json({});
-    })
-    .catch(err => console.error(err));
-});
-
-// @route   GET api/users/logout
-// @desc    User sign-out
-// @access  Private
-router.get('/logout', ensureAuthenticated, (req, res) => {
-  req.logout();
-  req.flash('success_msg', 'You are logged out');
-  res.redirect('/users/login');
-});
+// router.delete('/:id', ensureAuthenticated, (req, res) => {
+//   User.deleteOne({ _id: req.params.id })
+//     .then(() => {
+//       res.json({});
+//     })
+//     .catch(err => console.error(err));
+// });
 
 //export router
 module.exports = router;

@@ -5,9 +5,9 @@ const exphbs = require('express-handlebars');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
 const session = require('express-session');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const mongoose = require('mongoose');
 
 //initialize app
 const app = express();
@@ -57,9 +57,6 @@ app.use(
     saveUninitialized: true
   })
 );
-
-const port = process.env.PORT || 5000;
-
 //Passport middleware
 //must be after express session
 app.use(passport.initialize());
@@ -86,6 +83,8 @@ app.get('/', (req, res) => {
 
 //use routes
 app.use('/api/users', users);
+
+const port = process.env.PORT || 5000;
 
 //create server
 app.listen(port, () => {

@@ -29,3 +29,7 @@ A node-based social media app by Sharina V. Jones
 6. Connected the Users UI to the API
 7. Added the User template
 8. Connected the User template to the API
+9. Added the Profile template
+10. Connected the Profile template to the api
+11. Update NavBar based on login
+12. Connect logout functionality to UI
